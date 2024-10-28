@@ -76,7 +76,7 @@ class ModuleController {
 		}
 
 		$customer_data       = Data::customer_data();
-		$brand_enabled_flows = Flows::get_flows( false );
+		$brand_enabled_flows = Flows::get_flows();
 		foreach ( $brand_enabled_flows as $flow => $enabled ) {
 			if ( ! $enabled ) {
 				continue;
