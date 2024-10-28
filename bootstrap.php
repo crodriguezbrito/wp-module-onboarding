@@ -9,11 +9,6 @@ use NewfoldLabs\WP\Module\Onboarding\Compatibility\Status;
 
 use function NewfoldLabs\WP\ModuleLoader\register;
 
-// Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
-	return;
-}
-
 /**
  * Register Onboarding with Newfold Module Loader
  *
@@ -70,9 +65,11 @@ function nfd_wp_module_onboarding_register() {
 /**
  * Tap WordPress Hooks to Instantiate Module Loader
  */
-add_action(
-	'plugins_loaded',
-	'nfd_wp_module_onboarding_register'
-);
-// Handle Module Disable if Non-Ecommerce
-ModuleController::init();
+if ( is_callable( 'add_action' ) ) {
+	add_action(
+		'plugins_loaded',
+		'nfd_wp_module_onboarding_register'
+	);
+	// Handle Module Disable if Non-Ecommerce
+	ModuleController::init();
+}
