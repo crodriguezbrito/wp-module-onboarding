@@ -64,13 +64,12 @@ final class Application {
 			array( LoginRedirect::class, 'remove_handle_redirect_action' )
 		);
 
-		new RestAPI();
-
 		if ( defined( '\\WP_CLI' ) && \WP_CLI ) {
 			new WP_CLI();
 		}
 
 		if ( Permissions::is_authorized_admin() || Permissions::rest_is_authorized_admin() ) {
+			new RestAPI();
 			new WP_Admin();
 		}
 
