@@ -76,7 +76,7 @@ class ModuleController {
 		}
 
 		$customer_data       = Data::customer_data();
-		$brand_enabled_flows = Flows::get_flows();
+		$brand_enabled_flows = Flows::get_flows( false );
 		foreach ( $brand_enabled_flows as $flow => $enabled ) {
 			if ( ! $enabled ) {
 				continue;
@@ -88,6 +88,7 @@ class ModuleController {
 						return true;
 					}
 					break;
+				// The Sitegen flow always starts with wp-setup, regardless of whether the AI Sitegen capability is set.
 				case 'wp-setup':
 					return true;
 			}
