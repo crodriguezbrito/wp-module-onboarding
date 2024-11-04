@@ -28,7 +28,30 @@ class ExternalRedirectInterceptor {
 	 */
 	public function wp_redirect( $location ): string {
 		$runtime_data     = Data::runtime();
-		$brand_plugin_url = $runtime_data['currentBrand']['pluginDashboardPage'];
+		$brand_plugin_url = '';
+
+		/*
+		 * Get the brand plugin page URL from the runtime data.
+		 */
+		// Check if the current brand is set and is an array.
+		if (
+			isset( $runtime_data['currentBrand'] ) &&
+			is_array( $runtime_data['currentBrand'] )
+			) {
+			// Check if the pluginDashboardPage key is set and is a string.
+			if (
+				isset( $runtime_data['currentBrand']['pluginDashboardPage'] ) &&
+				is_string( $runtime_data['currentBrand']['pluginDashboardPage'] )
+				) {
+				// Set the brand plugin page URL.
+				$brand_plugin_url = $runtime_data['currentBrand']['pluginDashboardPage'];
+			}
+		}
+
+		// Intercept if the redirect if the brand plugin page URL is empty.
+		if ( empty( $brand_plugin_url ) ) {
+			return '';
+		}
 
 		$location_is_brand_plugin_url = strpos( $location, $brand_plugin_url );
 		// Intercept if the redirect is going anywhere other than the brand plugin page.
