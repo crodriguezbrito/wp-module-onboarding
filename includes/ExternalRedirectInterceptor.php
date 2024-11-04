@@ -48,9 +48,9 @@ class ExternalRedirectInterceptor {
 			}
 		}
 
-		// Intercept if the redirect if the brand plugin page URL is empty.
+		// Redirect if the brand plugin page URL is empty.
 		if ( empty( $brand_plugin_url ) ) {
-			return '';
+			return $location;
 		}
 
 		$location_is_brand_plugin_url = strpos( $location, $brand_plugin_url );
