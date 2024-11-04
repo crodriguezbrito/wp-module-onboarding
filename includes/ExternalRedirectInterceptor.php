@@ -30,17 +30,13 @@ class ExternalRedirectInterceptor {
 		$runtime_data     = Data::runtime();
 		$brand_plugin_url = '';
 
-		/*
-		 * Get the brand plugin page URL from the runtime data.
-		 */
-		// Check if the current brand is set and is an array.
+		// Get the brand plugin page URL from the runtime data.
 		if (
 			isset( $runtime_data['currentBrand'], $runtime_data['currentBrand']['pluginDashboardPage'] ) &&
 			is_string( $runtime_data['currentBrand']['pluginDashboardPage'] )
-				) {
+			) {
 				// Set the brand plugin page URL.
 				$brand_plugin_url = $runtime_data['currentBrand']['pluginDashboardPage'];
-			}
 		}
 
 		// Redirect if the brand plugin page URL is empty.
