@@ -10,8 +10,11 @@ use NewfoldLabs\WP\Module\Onboarding\Data\Data;
  * The only allowed redirect is to the brand plugin page.
  */
 class ExternalRedirectInterceptor {
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
-		if ( ! isset( $_GET['page'] ) || WP_Admin::$slug !== \sanitize_text_field( $_GET['page'] ) ) {
+		if ( ! isset( $_GET['page'] ) || \sanitize_text_field( $_GET['page'] ) !== WP_Admin::$slug ) {
 			return;
 		}
 
@@ -23,7 +26,7 @@ class ExternalRedirectInterceptor {
 	 *
 	 * @param string $location The location to redirect to.
 	 */
-	public function wp_redirect($location): string {
+	public function wp_redirect( $location ): string {
 		$runtime_data = Data::runtime();
 		$brand_plugin_url  = $runtime_data['currentBrand']['pluginDashboardPage'];
 
