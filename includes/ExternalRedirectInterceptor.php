@@ -35,13 +35,8 @@ class ExternalRedirectInterceptor {
 		 */
 		// Check if the current brand is set and is an array.
 		if (
-			isset( $runtime_data['currentBrand'] ) &&
-			is_array( $runtime_data['currentBrand'] )
-			) {
-			// Check if the pluginDashboardPage key is set and is a string.
-			if (
-				isset( $runtime_data['currentBrand']['pluginDashboardPage'] ) &&
-				is_string( $runtime_data['currentBrand']['pluginDashboardPage'] )
+			isset( $runtime_data['currentBrand'], $runtime_data['currentBrand']['pluginDashboardPage'] ) &&
+			is_string( $runtime_data['currentBrand']['pluginDashboardPage'] )
 				) {
 				// Set the brand plugin page URL.
 				$brand_plugin_url = $runtime_data['currentBrand']['pluginDashboardPage'];
