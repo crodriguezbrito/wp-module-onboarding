@@ -27,11 +27,12 @@ class ExternalRedirectInterceptor {
 	 * @param string $location The location to redirect to.
 	 */
 	public function wp_redirect( $location ): string {
-		$runtime_data = Data::runtime();
-		$brand_plugin_url  = $runtime_data['currentBrand']['pluginDashboardPage'];
+		$runtime_data     = Data::runtime();
+		$brand_plugin_url = $runtime_data['currentBrand']['pluginDashboardPage'];
 
+		$location_is_brand_plugin_url = strpos( $location, $brand_plugin_url );
 		// Intercept if the redirect is going anywhere other than the brand plugin page.
-		if ( strpos( $location, $brand_plugin_url ) !== 0 ) {
+		if ( false === $location_is_brand_plugin_url || 0 !== $location_is_brand_plugin_url ) {
 			return '';
 		}
 
