@@ -155,6 +155,12 @@ final class WP_Admin {
 	 * @return void
 	 */
 	public static function initialize() {
+		global $title;
+
+		if ( is_null( $title ) ) {
+			$title = __( 'Onboarding', 'wp-module-onboarding' );
+		}
+
 		if ( ! empty( $_GET['nfd_plugins'] ) && 'true' === sanitize_text_field( $_GET['nfd_plugins'] ) ) {
 			PluginService::initialize();
 		}
